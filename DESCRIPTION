@@ -15,4 +15,6 @@ Suggests:
     testthat
 Imports: 
     base,
-    data.table
+    data.table,
+    stats,
+    ggplot2

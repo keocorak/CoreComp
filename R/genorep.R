@@ -2,8 +2,8 @@
 #'
 #' Calculate distance between each accession and the nearest entry in the core and average over all accessions
 #'
-#' @param geno.dist.all matrix
-#' @param core.names vector
+#' @param geno.dist.all distance matrix
+#' @param core.names character vector of entry names to be included in core
 #'
 #' @return
 #' @export
@@ -22,8 +22,8 @@ ANE<-function(geno.dist.all, core.names){
 #'
 #' Calculate distance between nearest entries in the core and average over all entries
 #'
-#' @param geno.dist.all matrix
-#' @param core.names vector
+#' @param geno.dist.all distance matrix
+#' @param core.names character vector of entry names to be included in core
 #'
 #' @return
 #' @export
@@ -43,8 +43,8 @@ ENE<-function(geno.dist.all, core.names){
 #'
 #' Sum distances between all pairs of entries in the core and divide by number of comparisons
 #'
-#' @param geno.dist.all matrix
-#' @param core.names vector
+#' @param geno.dist.all distance matrix
+#' @param core.names character vector of entry names to be included in core
 #'
 #' @return
 #' @export
@@ -65,9 +65,9 @@ EE<-function(geno.dist.all, core.names){
 #'
 #' Perform multidimensional scaling of genotypic distance matrix and calculate summed relative contribution of entries in core set following Noirot et al. (1996).
 #'
-#' @param geno.dist.all matrix
-#' @param core.names vector
-#' @param k integer
+#' @param geno.dist.all distance matrix
+#' @param core.names character vector of entry names to be included in core
+#' @param k the maximum dimensions in which to represent data; must be less than n
 #'
 #' @return
 #' @export
@@ -75,6 +75,9 @@ EE<-function(geno.dist.all, core.names){
 #' @examples
 #'
 noirot.contribution<-function(geno.dist.all, core.names, k=2){
+  if(is.null(core.names)) stop('provide vector of entries')
+  if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
+  if(k>dim(geno.dist.all)[1]) stop('k must be less than n')
 
   geno.dist.all.mds<-stats::cmdscale(geno.dist.all,k)
 
@@ -111,12 +114,28 @@ noirot.contribution<-function(geno.dist.all, core.names, k=2){
   }
 
 
+#' MDS bi-plot of accessions
+#'
+#' @param geno.dist.all distance matrix
+#' @param core.names character vector of entry names to be included in core
+#' @param k the maximum dimensions in which to represent data; must be less than n
+#' @param axes vector of dimensions to represent with bi-plot, must  be equal to 2
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plot.geno.entries<-function(geno.dist.all, core.names, k=3, axes=c(1,2)){
+
+  if(is.null(core.names)) stop('provide vector of entries')
+  if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
+  if(k>dim(geno.dist.all)[1]) stop('k must be less than n')
+
   geno.dist.all.mds<-stats::cmdscale(geno.dist.all,k)
   ggplot2::ggplot(as.data.frame(geno.dist.all.mds), ggplot2::aes(x=geno.dist.all.mds[,axes[1]], y=geno.dist.all.mds[,axes[2]]))+
-    ggplot2::geom_point(ggplot2::aes(color=factor(rownames(geno.dist.all.mds) %in% CN)))+
+    ggplot2::geom_point(ggplot2::aes(color=factor(rownames(geno.dist.all.mds) %in% core.names)))+
     ggplot2::xlab(paste("PC", axes[1], sep=" "))+ggplot2::ylab(paste("PC", axes[2], sep=" "))+
-    ggplot2::scale_color_discrete(name="core entries", labels=c(" ", "core entry"))
+    ggplot2::scale_color_discrete(name="core entries", labels=c("no", "yes"))
 
 
   }

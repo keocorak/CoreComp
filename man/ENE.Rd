@@ -7,9 +7,9 @@
 ENE(geno.dist.all, core.names)
 }
 \arguments{
-\item{geno.dist.all}{matrix}
+\item{geno.dist.all}{distance matrix}
 
-\item{core.names}{vector}
+\item{core.names}{character vector of entry names to be included in core}
 }
 \value{
 
