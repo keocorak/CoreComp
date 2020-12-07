@@ -8,7 +8,6 @@
 #' @return
 #' @export
 #'
-#' @examples
 ANE<-function(geno.dist.all, core.names){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
@@ -28,7 +27,6 @@ ANE<-function(geno.dist.all, core.names){
 #' @return
 #' @export
 #'
-#' @examples
 ENE<-function(geno.dist.all, core.names){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
@@ -49,7 +47,6 @@ ENE<-function(geno.dist.all, core.names){
 #' @return
 #' @export
 #'
-#' @examples
 EE<-function(geno.dist.all, core.names){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
@@ -71,8 +68,6 @@ EE<-function(geno.dist.all, core.names){
 #'
 #' @return
 #' @export
-#'
-#' @examples
 #'
 noirot.contribution<-function(geno.dist.all, core.names, k=2){
   if(is.null(core.names)) stop('provide vector of entries')
@@ -116,16 +111,18 @@ noirot.contribution<-function(geno.dist.all, core.names, k=2){
 
 #' MDS bi-plot of accessions
 #'
-#' @param geno.dist.all distance matrix
+#' @param x distance matrix
 #' @param core.names character vector of entry names to be included in core
 #' @param k the maximum dimensions in which to represent data; must be less than n
 #' @param axes vector of dimensions to represent with bi-plot, must  be equal to 2
+#' @param ... other parameters
 #'
 #' @return
 #' @export
 #'
-#' @examples
-plot.geno.entries<-function(geno.dist.all, core.names, k=3, axes=c(1,2)){
+plot.geno.entries<-function(x, core.names, k=2, axes=c(1,2), ...){
+
+  geno.dist.all=x
 
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')

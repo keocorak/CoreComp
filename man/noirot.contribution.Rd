@@ -19,6 +19,3 @@ noirot.contribution(geno.dist.all, core.names, k = 2)
 \description{
 Perform multidimensional scaling of genotypic distance matrix and calculate summed relative contribution of entries in core set following Noirot et al. (1996).
 }
-\examples{
-
-}

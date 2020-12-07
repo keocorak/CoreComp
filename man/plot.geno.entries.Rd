@@ -4,16 +4,18 @@
 \alias{plot.geno.entries}
 \title{MDS bi-plot of accessions}
 \usage{
-\method{plot}{geno.entries}(geno.dist.all, core.names, k = 3, axes = c(1, 2))
+\method{plot}{geno.entries}(x, core.names, k = 2, axes = c(1, 2), ...)
 }
 \arguments{
-\item{geno.dist.all}{distance matrix}
+\item{x}{distance matrix}
 
 \item{core.names}{character vector of entry names to be included in core}
 
 \item{k}{the maximum dimensions in which to represent data; must be less than n}
 
 \item{axes}{vector of dimensions to represent with bi-plot, must  be equal to 2}
+
+\item{...}{other parameters}
 }
 \value{
 
