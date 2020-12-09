@@ -17,4 +17,5 @@ Imports:
     base,
     data.table,
     stats,
-    ggplot2
+    ggplot2,
+    factoextra
