@@ -6,11 +6,11 @@
 #' @param geno.dist.all genotypic distance matrix
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
 #'
-#' @return
+#' @return correlation between cophenetic distances and original distance matrix
 #' @export
 #'
 cor.cophentic<-function(geno.dist.all, hc.method="ward.D2"){
-  cor(as.dist(geno.dist.all), cophenetic(hclust(as.dist(geno.dist.all), method=hc.method)))
+  stats::cor(stats::as.dist(geno.dist.all), stats::cophenetic(stats::hclust(stats::as.dist(geno.dist.all), method=hc.method)))
 }
 
 
@@ -22,7 +22,8 @@ cor.cophentic<-function(geno.dist.all, hc.method="ward.D2"){
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
 #' @param plot.sil TRUE/FALSE to plot silhouette widths
 #'
-#' @return
+#' @return data frame of average silhouette width for different numbers of clusters
+#' @return scree plot of average silhouette widths
 #' @export
 #'
 #' @examples
@@ -38,12 +39,12 @@ sil.width<-function(geno.dist.all, n.clust.to.check=9, hc.func="hclust", hc.meth
     silwidth[,1]<-2:n.clust.to.check
 
   for (j in 2:n.clust.to.check){
-    tmp<-factoextra::hcut(as.dist(geno.dist.all), k=j, isdiss=TRUE, hc.func=hc.func, hc.method=hc.method)
+    tmp<-factoextra::hcut(stats::as.dist(geno.dist.all), k=j, isdiss=TRUE, hc.func=hc.func, hc.method=hc.method)
     silwidth[(j-1),2]<-tmp$silinfo$avg.width
   }
 
 
-  sil.plot<- ggplot2::ggplot(data=silwidth, ggplot2::aes(x=n.clusters, y=ave.sil.width))+
+  sil.plot<- ggplot2::ggplot(data=silwidth, ggplot2::aes_string(x='n.clusters', y='ave.sil.width'))+
     ggplot2::geom_line()+
     ggplot2::geom_vline(xintercept=silwidth[which.max(silwidth[,2]),1], linetype="dotted")
 
@@ -59,23 +60,23 @@ sil.width<-function(geno.dist.all, n.clust.to.check=9, hc.func="hclust", hc.meth
 #'
 #' @param geno.dist.all genetic distance matrix
 #' @param n.clust number of clusters into which to group accessions
-#' @param hc.method
+#' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
 #' @param size.core percentage of total number of accessions to select for core, default is 10%
 #'
 #' @return
 #' @export
-#'
 
-geno.core<-function(geno.dist.all, n.clust, hc.method="ward.D2", size.core=0.1){
+
+geno.core<-function(geno.dist.all, n.clust, size.core=0.1, hc.method="ward.D2"){
 
   if(n.clust>=dim(geno.dist.all)[1]) stop('number of clusters must be less than number of accessions')
   if(size.core>1) stop('size of core must be expressed as a proportion')
 
-    geno.clust<-hclust(as.dist(geno.dist.all), method=hc.method)
-    group<-cutree(geno.clust, k=n.clust)
+    geno.clust<-stats::hclust(stats::as.dist(geno.dist.all), method=hc.method)
+    group<-stats::cutree(geno.clust, k=n.clust)
 
 
-    group<-cbind(read.table(text=names(group)), group)
+    group<-cbind(utils::read.table(text=names(group)), group)
     colnames(group)[1]<-"name"
 
 

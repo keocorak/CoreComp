@@ -5,7 +5,7 @@
 #' @param geno.dist.all distance matrix
 #' @param core.names character vector of entry names to be included in core
 #'
-#' @return
+#' @return average distance between each accession and the nearest entry
 #' @export
 #'
 ANE<-function(geno.dist.all, core.names){
@@ -24,7 +24,7 @@ ANE<-function(geno.dist.all, core.names){
 #' @param geno.dist.all distance matrix
 #' @param core.names character vector of entry names to be included in core
 #'
-#' @return
+#' @return average distance between each entry and nearest neighbor entry
 #' @export
 #'
 ENE<-function(geno.dist.all, core.names){
@@ -44,7 +44,7 @@ ENE<-function(geno.dist.all, core.names){
 #' @param geno.dist.all distance matrix
 #' @param core.names character vector of entry names to be included in core
 #'
-#' @return
+#' @return average distance between entries
 #' @export
 #'
 EE<-function(geno.dist.all, core.names){
@@ -66,7 +66,7 @@ EE<-function(geno.dist.all, core.names){
 #' @param core.names character vector of entry names to be included in core
 #' @param k the maximum dimensions in which to represent data; must be less than n
 #'
-#' @return
+#' @return PC score
 #' @export
 #'
 noirot.contribution<-function(geno.dist.all, core.names, k=2){
@@ -117,7 +117,7 @@ noirot.contribution<-function(geno.dist.all, core.names, k=2){
 #' @param axes vector of dimensions to represent with bi-plot, must  be equal to 2
 #' @param ... other parameters
 #'
-#' @return
+#' @return biplot of results from multidimensional scaling of genetic distance matrix with entries selected for the core highlighted
 #' @export
 #'
 plot.geno.entries<-function(x, core.names, k=2, axes=c(1,2), ...){

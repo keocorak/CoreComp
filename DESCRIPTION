@@ -19,4 +19,5 @@ Imports:
     stats,
     ggplot2,
     factoextra,
-    plyr
+    plyr,
+    utils
