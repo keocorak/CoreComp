@@ -18,7 +18,7 @@
 \item{...}{other parameters}
 }
 \value{
-
+biplot of results from multidimensional scaling of genetic distance matrix with entries selected for the core highlighted
 }
 \description{
 MDS bi-plot of accessions

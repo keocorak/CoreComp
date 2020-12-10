@@ -20,4 +20,5 @@ Imports:
     ggplot2,
     factoextra,
     plyr,
-    utils
+    utils,
+    geosphere

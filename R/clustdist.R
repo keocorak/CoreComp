@@ -3,20 +3,20 @@
 #'
 #' calculate correlation between cophenetic distances and original distance matrix
 #'
-#' @param geno.dist.all genotypic distance matrix
+#' @param dist.all distance matrix
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
 #'
 #' @return correlation between cophenetic distances and original distance matrix
 #' @export
 #'
-cor.cophentic<-function(geno.dist.all, hc.method="ward.D2"){
-  stats::cor(stats::as.dist(geno.dist.all), stats::cophenetic(stats::hclust(stats::as.dist(geno.dist.all), method=hc.method)))
+cor.cophentic<-function(dist.all, hc.method="ward.D2"){
+  stats::cor(stats::as.dist(dist.all), stats::cophenetic(stats::hclust(stats::as.dist(dist.all), method=hc.method)))
 }
 
 
 #' Calculate Average Silhouette Widths
 #'
-#' @param geno.dist.all genetic distance matrix
+#' @param dist.all distance matrix
 #' @param n.clust.to.check largest number of clusters to test, must be less than number of accessions
 #' @param hc.func hierarchical clustering function to be used. Default is "hclust". See factoextra::hcut for other options.
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
@@ -26,11 +26,11 @@ cor.cophentic<-function(geno.dist.all, hc.method="ward.D2"){
 #' @return scree plot of average silhouette widths
 #' @export
 #'
-#' @examples
-sil.width<-function(geno.dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="ward.D2", plot.sil=TRUE){
+
+sil.width<-function(dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="ward.D2", plot.sil=TRUE){
 
 
-  if(n.clust.to.check>=dim(geno.dist.all)[1]) stop('number of clusters must be less than number of accessions')
+  if(n.clust.to.check>=dim(dist.all)[1]) stop('number of clusters must be less than number of accessions')
 
 
   silwidth<-as.data.frame(matrix(NA, nrow=n.clust.to.check-1, ncol=2))
@@ -39,7 +39,7 @@ sil.width<-function(geno.dist.all, n.clust.to.check=9, hc.func="hclust", hc.meth
     silwidth[,1]<-2:n.clust.to.check
 
   for (j in 2:n.clust.to.check){
-    tmp<-factoextra::hcut(stats::as.dist(geno.dist.all), k=j, isdiss=TRUE, hc.func=hc.func, hc.method=hc.method)
+    tmp<-factoextra::hcut(stats::as.dist(dist.all), k=j, isdiss=TRUE, hc.func=hc.func, hc.method=hc.method)
     silwidth[(j-1),2]<-tmp$silinfo$avg.width
   }
 
@@ -56,24 +56,24 @@ sil.width<-function(geno.dist.all, n.clust.to.check=9, hc.func="hclust", hc.meth
 
 }
 
-#' Select a Core Collection based on genotypic distances
+#' Select a Core Collection based on a distance matrix
 #'
-#' @param geno.dist.all genetic distance matrix
+#' @param dist.all a distance matrix
 #' @param n.clust number of clusters into which to group accessions
+#' @param size.core percentage of total number of accessions to select for core, default is 10\%
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
-#' @param size.core percentage of total number of accessions to select for core, default is 10%
 #'
-#' @return
+#' @return dataframe of core entries and the cluster group, pass entry column as a vector
 #' @export
 
 
-geno.core<-function(geno.dist.all, n.clust, size.core=0.1, hc.method="ward.D2"){
+dist.core<-function(dist.all, n.clust, size.core=0.1, hc.method="ward.D2"){
 
-  if(n.clust>=dim(geno.dist.all)[1]) stop('number of clusters must be less than number of accessions')
+  if(n.clust>=dim(dist.all)[1]) stop('number of clusters must be less than number of accessions')
   if(size.core>1) stop('size of core must be expressed as a proportion')
 
-    geno.clust<-stats::hclust(stats::as.dist(geno.dist.all), method=hc.method)
-    group<-stats::cutree(geno.clust, k=n.clust)
+    dist.clust<-stats::hclust(stats::as.dist(dist.all), method=hc.method)
+    group<-stats::cutree(dist.clust, k=n.clust)
 
 
     group<-cbind(utils::read.table(text=names(group)), group)

@@ -14,7 +14,7 @@ noirot.contribution(geno.dist.all, core.names, k = 2)
 \item{k}{the maximum dimensions in which to represent data; must be less than n}
 }
 \value{
-
+PC score
 }
 \description{
 Perform multidimensional scaling of genotypic distance matrix and calculate summed relative contribution of entries in core set following Noirot et al. (1996).

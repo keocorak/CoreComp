@@ -12,7 +12,7 @@ EE(geno.dist.all, core.names)
 \item{core.names}{character vector of entry names to be included in core}
 }
 \value{
-
+average distance between entries
 }
 \description{
 Sum distances between all pairs of entries in the core and divide by number of comparisons

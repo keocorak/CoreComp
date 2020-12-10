@@ -12,7 +12,7 @@ ENE(geno.dist.all, core.names)
 \item{core.names}{character vector of entry names to be included in core}
 }
 \value{
-
+average distance between each entry and nearest neighbor entry
 }
 \description{
 Calculate distance between nearest entries in the core and average over all entries

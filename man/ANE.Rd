@@ -12,7 +12,7 @@ ANE(geno.dist.all, core.names)
 \item{core.names}{character vector of entry names to be included in core}
 }
 \value{
-
+average distance between each accession and the nearest entry
 }
 \description{
 Calculate distance between each accession and the nearest entry in the core and average over all accessions
