@@ -23,4 +23,8 @@ Imports:
     utils,
     geosphere,
     reshape,
-    lme4
+    lme4,
+    FactoMineR,
+    rrBLUP
+Depends: 
+    R (>= 2.10)

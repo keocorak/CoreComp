@@ -42,6 +42,7 @@ lsmeans<-function(x,id.vars, measure.vars, form, uniquecol, out="means", alpha=N
 
   if(out=="means"){
     return(blues.frame)
+
   } else if(out=="ci") {
     se_blues <- stats::coef(summary(fit))[grep(colnames(x)[uniquecol], names(lme4::fixef(fit))), "Std. Error"]
     edf <- sum(stats::hatvalues(fit))

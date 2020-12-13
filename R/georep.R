@@ -5,7 +5,6 @@
 #' @param x data frame : contains columns for accessions names, latitude (column name must include "lat") and longitude (column name must include "long"). Coordinates must be in decimal form.
 #' @param core.names vector: accessions in core
 #' @param core.groups vector or NULL: entry subgroup (likely from clustering). If provided, plot.all must be FALSE.
-#' @param plot.all logical TRUE/FALSE: should all accessions be plotted? If TRUE, core entries are highlighted in red.
 #' @param region character vector: regions/countries to plot. Default is a world map.
 #' @param size integer: size of points to plot
 #' @param ... legacy paramaters from 'plot()'
@@ -14,7 +13,7 @@
 #' @export
 #'
 
-plot.map<-function(x, core.names, core.groups=NULL, plot.all=TRUE, region=".", size=2,  ...){
+plot.map<-function(x, core.names, core.groups=NULL, region=".", size=2,  ...){
 
   map<- NULL
   mapWorld <- ggplot2::borders("world", regions=region, colour="gray50", fill="gray50")
@@ -22,7 +21,7 @@ plot.map<-function(x, core.names, core.groups=NULL, plot.all=TRUE, region=".", s
 
 
 
-  if(plot.all==TRUE){
+  if(is.null(core.groups)){
     print(map+ggplot2::geom_point(data=x, size=size,
                          ggplot2::aes_string(x=grep("long", colnames(x)), y=grep("lat", colnames(x)),
                                     color=factor(match(x[,1],core.names, nomatch=0)>0)),

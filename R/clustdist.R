@@ -9,7 +9,7 @@
 #' @return correlation between cophenetic distances and original distance matrix
 #' @export
 #'
-cor.cophentic<-function(dist.all, hc.method="ward.D2"){
+cor.cophenetic<-function(dist.all, hc.method="ward.D2"){
   stats::cor(stats::as.dist(dist.all), stats::cophenetic(stats::hclust(stats::as.dist(dist.all), method=hc.method)))
 }
 
@@ -30,7 +30,7 @@ cor.cophentic<-function(dist.all, hc.method="ward.D2"){
 sil.width<-function(dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="ward.D2", plot.sil=TRUE){
 
 
-  if(n.clust.to.check>=dim(dist.all)[1]) stop('number of clusters must be less than number of accessions')
+  if(n.clust.to.check>=dim(as.matrix(dist.all))[1]) stop('number of clusters must be less than number of accessions')
 
 
   silwidth<-as.data.frame(matrix(NA, nrow=n.clust.to.check-1, ncol=2))
@@ -69,7 +69,7 @@ sil.width<-function(dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="w
 
 dist.core<-function(dist.all, n.clust, size.core=0.1, hc.method="ward.D2"){
 
-  if(n.clust>=dim(dist.all)[1]) stop('number of clusters must be less than number of accessions')
+  if(n.clust>=dim(as.matrix(dist.all))[1]) stop('number of clusters must be less than number of accessions')
   if(size.core>1) stop('size of core must be expressed as a proportion')
 
     dist.clust<-stats::hclust(stats::as.dist(dist.all), method=hc.method)

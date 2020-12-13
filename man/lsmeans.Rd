@@ -4,25 +4,25 @@
 \alias{lsmeans}
 \title{Least Squares Means}
 \usage{
-lsmeans(x, id.vars, measure.vars, form, uniquecol, like, alpha = 0.05)
+lsmeans(x, id.vars, measure.vars, form, uniquecol, out = "means", alpha = NULL)
 }
 \arguments{
-\item{x}{data table}
+\item{x}{a data frame containing entry names,}
 
-\item{id.vars}{numeric vector corresponding to columns in data}
+\item{id.vars}{numeric vector corresponding to ID variables columns in data}
 
-\item{measure.vars}{numeric vector corresponding to columns in data}
+\item{measure.vars}{numeric vector corresponding to measured variables columns in data}
 
 \item{form}{model formula, for example "value~-1+entryID+(1|rep)"}
 
 \item{uniquecol}{integer corresponding to entry names column- will be included in data frame output}
 
-\item{like}{character string that indicates that something is an entry}
+\item{out}{data to return. Should be either "means" for least-squares means estimates or "ci" for confidence intervals.}
 
-\item{alpha}{confidence level for confidence intervals}
+\item{alpha}{significance level used to construct confidence intervals. Only used when out="ci"}
 }
 \value{
-Rdata files of lsmeans and confidence intervals
+dataframe of means or confidence intervals
 }
 \description{
 Calculate least squares means for experimental phenotype data

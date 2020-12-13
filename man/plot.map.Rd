@@ -4,15 +4,7 @@
 \alias{plot.map}
 \title{Plot geographic map of core entries}
 \usage{
-\method{plot}{map}(
-  x,
-  core.names,
-  core.groups = NULL,
-  plot.all = TRUE,
-  region = ".",
-  size = 2,
-  ...
-)
+\method{plot}{map}(x, core.names, core.groups = NULL, region = ".", size = 2, ...)
 }
 \arguments{
 \item{x}{data frame : contains columns for accessions names, latitude (column name must include "lat") and longitude (column name must include "long"). Coordinates must be in decimal form.}
@@ -20,8 +12,6 @@
 \item{core.names}{vector: accessions in core}
 
 \item{core.groups}{vector or NULL: entry subgroup (likely from clustering). If provided, plot.all must be FALSE.}
-
-\item{plot.all}{logical TRUE/FALSE: should all accessions be plotted? If TRUE, core entries are highlighted in red.}
 
 \item{region}{character vector: regions/countries to plot. Default is a world map.}
 
