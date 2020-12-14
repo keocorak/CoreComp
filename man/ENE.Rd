@@ -7,7 +7,7 @@
 ENE(geno.dist.all, core.names)
 }
 \arguments{
-\item{geno.dist.all}{distance matrix}
+\item{geno.dist.all}{genetic distance matrix}
 
 \item{core.names}{character vector of entry names to be included in core}
 }
@@ -15,5 +15,8 @@ ENE(geno.dist.all, core.names)
 average distance between each entry and nearest neighbor entry
 }
 \description{
-Calculate distance between nearest entries in the core and average over all entries
+Calculate distance between nearest entries in the core and average over all entries. Value should be as large as possible (see Odong et al. 2013).
+}
+\examples{
+core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9); ENE(dist(fake_geno), core$name)
 }

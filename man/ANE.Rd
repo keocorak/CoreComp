@@ -7,7 +7,7 @@
 ANE(geno.dist.all, core.names)
 }
 \arguments{
-\item{geno.dist.all}{distance matrix}
+\item{geno.dist.all}{genetic distance matrix}
 
 \item{core.names}{character vector of entry names to be included in core}
 }
@@ -15,5 +15,9 @@ ANE(geno.dist.all, core.names)
 average distance between each accession and the nearest entry
 }
 \description{
-Calculate distance between each accession and the nearest entry in the core and average over all accessions
+Calculate distance between each accession and the nearest entry in the core and then average over all accessions. Value should be as small as possible (see Odong et al. 2013).
+}
+\examples{
+core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9); ANE(dist(fake_geno), core$name)
+
 }

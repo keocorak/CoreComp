@@ -3,7 +3,6 @@
 #' Calculate least squares means for experimental phenotype data
 #'
 #'
-#'
 #' @param x a data frame containing entry names,
 #' @param id.vars numeric vector corresponding to ID variables columns in data
 #' @param measure.vars numeric vector corresponding to measured variables columns in data

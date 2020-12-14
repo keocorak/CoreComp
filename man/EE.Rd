@@ -2,7 +2,7 @@
 % Please edit documentation in R/genorep.R
 \name{EE}
 \alias{EE}
-\title{Average distances between entries}
+\title{Average distances between entries (EE)}
 \usage{
 EE(geno.dist.all, core.names)
 }
@@ -15,5 +15,8 @@ EE(geno.dist.all, core.names)
 average distance between entries
 }
 \description{
-Sum distances between all pairs of entries in the core and divide by number of comparisons
+Sum distances between all pairs of entries in the core and divide by number of comparisons. Value should be as large as possible (see Odong et al. 2013).
+}
+\examples{
+core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9); ENE(dist(fake_geno), core$name)
 }

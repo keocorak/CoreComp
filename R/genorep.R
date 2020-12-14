@@ -1,16 +1,19 @@
 #' Average distance between each accession and the nearest entry (A.NE)
 #'
-#' Calculate distance between each accession and the nearest entry in the core and average over all accessions
+#' Calculate distance between each accession and the nearest entry in the core and then average over all accessions. Value should be as small as possible (see Odong et al. 2013).
 #'
-#' @param geno.dist.all distance matrix
+#' @param geno.dist.all genetic distance matrix
 #' @param core.names character vector of entry names to be included in core
 #'
 #' @return average distance between each accession and the nearest entry
 #' @export
 #'
+#' @examples core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9); ANE(dist(fake_geno), core$name)
+#'
 ANE<-function(geno.dist.all, core.names){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
+  geno.dist.all<-as.matrix(geno.dist.all)
   geno.dist.ane<-as.matrix(geno.dist.all[as.vector(core.names), !colnames(geno.dist.all)  %in% as.vector(core.names)]) #compare core to all
   l<-apply(geno.dist.ane,2,min) #find min
   sum(l)/length(l) #find average
@@ -19,17 +22,19 @@ ANE<-function(geno.dist.all, core.names){
 
 #' Average distance between each entry and nearest neighbor entry  (E.NE)
 #'
-#' Calculate distance between nearest entries in the core and average over all entries
+#' Calculate distance between nearest entries in the core and average over all entries. Value should be as large as possible (see Odong et al. 2013).
 #'
-#' @param geno.dist.all distance matrix
+#' @param geno.dist.all genetic distance matrix
 #' @param core.names character vector of entry names to be included in core
 #'
 #' @return average distance between each entry and nearest neighbor entry
 #' @export
 #'
+#' @examples core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9); ENE(dist(fake_geno), core$name)
 ENE<-function(geno.dist.all, core.names){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
+  geno.dist.all<-as.matrix(geno.dist.all)
   geno.dist.ene<-as.matrix(geno.dist.all[as.vector(core.names), as.vector(core.names)])
   diag(geno.dist.ene)<-NA
   s<-apply(geno.dist.ene, 2, min, na.rm=T)
@@ -37,9 +42,9 @@ ENE<-function(geno.dist.all, core.names){
 }
 
 
-#' Average distances between entries
+#' Average distances between entries (EE)
 #'
-#' Sum distances between all pairs of entries in the core and divide by number of comparisons
+#' Sum distances between all pairs of entries in the core and divide by number of comparisons. Value should be as large as possible (see Odong et al. 2013).
 #'
 #' @param geno.dist.all distance matrix
 #' @param core.names character vector of entry names to be included in core
@@ -47,9 +52,11 @@ ENE<-function(geno.dist.all, core.names){
 #' @return average distance between entries
 #' @export
 #'
+#' @examples core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9); ENE(dist(fake_geno), core$name)
 EE<-function(geno.dist.all, core.names){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
+  geno.dist.all<-as.matrix(geno.dist.all)
   geno.dist.ee<-as.matrix(geno.dist.all[as.vector(core.names), as.vector(core.names)])
   geno.dist.ee[upper.tri(geno.dist.ee)]<-NA
   ee<-apply(geno.dist.ee, 2, sum, na.rm=T)
@@ -62,13 +69,16 @@ EE<-function(geno.dist.all, core.names){
 #'
 #' Perform multidimensional scaling of genotypic distance matrix and calculate summed relative contribution of entries in core set following Noirot et al. (1996).
 #'
-#' @param geno.dist.all distance matrix
+#' @param geno.dist.all genetic distance matrix
 #' @param core.names character vector of entry names to be included in core
 #' @param k the maximum dimensions in which to represent data; must be less than n
 #'
 #' @return PC score
 #' @export
 #'
+#' @examples core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9)
+#' @examples noirot.contribution(as.matrix(dist(fake_geno)), core$name)
+
 noirot.contribution<-function(geno.dist.all, core.names, k=2){
   if(is.null(core.names)) stop('provide vector of entries')
   if(is.null(geno.dist.all)|is.vector(geno.dist.all)) stop('matrix cannot be a vector')
@@ -111,10 +121,10 @@ noirot.contribution<-function(geno.dist.all, core.names, k=2){
 
 #' MDS bi-plot of accessions
 #'
-#' @param x distance matrix
+#' @param x genetic distance matrix
 #' @param core.names character vector of entry names to be included in core
 #' @param k the maximum dimensions in which to represent data; must be less than n
-#' @param axes vector of dimensions to represent with bi-plot, must  be equal to 2
+#' @param axes vector of length 2 specifying dimensions to represent with bi-plot
 #' @param ... other parameters
 #'
 #' @return biplot of results from multidimensional scaling of genetic distance matrix with entries selected for the core highlighted

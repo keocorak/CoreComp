@@ -15,19 +15,20 @@ sil.width(
 \arguments{
 \item{dist.all}{distance matrix}
 
-\item{n.clust.to.check}{largest number of clusters to test, must be less than number of accessions}
+\item{n.clust.to.check}{integer function will evaluate cluster sizes from 1:n.clust.to.check}
 
 \item{hc.func}{hierarchical clustering function to be used. Default is "hclust". See factoextra::hcut for other options.}
 
 \item{hc.method}{agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.}
 
-\item{plot.sil}{TRUE/FALSE to plot silhouette widths}
+\item{plot.sil}{logical TRUE/FALSE to output scree plot of silhouette widths}
 }
 \value{
 data frame of average silhouette width for different numbers of clusters
-
-scree plot of average silhouette widths
 }
 \description{
-Calculate Average Silhouette Widths
+Returns and plots average silhouette widths for 1:n clusters where n is any number less than the total number of accessions.
+}
+\examples{
+data(fake_geno); sil.width(dist(fake_geno))
 }

@@ -1,7 +1,8 @@
 
 #'Correlate Cophenetic Distances
 #'
-#' calculate correlation between cophenetic distances and original distance matrix
+#' Calculates correlation between cophenetic distances and an original distance matrix.
+#' High correlation (>0.8) can provide evidence for population structure.
 #'
 #' @param dist.all distance matrix
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
@@ -9,6 +10,7 @@
 #' @return correlation between cophenetic distances and original distance matrix
 #' @export
 #'
+#' @examples data(fake_geno); cor.cophenetic(dist(fake_geno))
 cor.cophenetic<-function(dist.all, hc.method="ward.D2"){
   stats::cor(stats::as.dist(dist.all), stats::cophenetic(stats::hclust(stats::as.dist(dist.all), method=hc.method)))
 }
@@ -16,16 +18,19 @@ cor.cophenetic<-function(dist.all, hc.method="ward.D2"){
 
 #' Calculate Average Silhouette Widths
 #'
+#' Returns and plots average silhouette widths for 1:n clusters where n is any number less than the total number of accessions.
+#'
 #' @param dist.all distance matrix
-#' @param n.clust.to.check largest number of clusters to test, must be less than number of accessions
+#' @param n.clust.to.check integer function will evaluate cluster sizes from 1:n.clust.to.check
 #' @param hc.func hierarchical clustering function to be used. Default is "hclust". See factoextra::hcut for other options.
 #' @param hc.method agglomeration method to be used. Default method is "ward.D2" See stats::hclust for other options.
-#' @param plot.sil TRUE/FALSE to plot silhouette widths
+#' @param plot.sil logical TRUE/FALSE to output scree plot of silhouette widths
 #'
 #' @return data frame of average silhouette width for different numbers of clusters
-#' @return scree plot of average silhouette widths
 #' @export
 #'
+#' @examples
+#' data(fake_geno); sil.width(dist(fake_geno))
 
 sil.width<-function(dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="ward.D2", plot.sil=TRUE){
 
@@ -58,6 +63,8 @@ sil.width<-function(dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="w
 
 #' Select a Core Collection based on a distance matrix
 #'
+#' Clusters accessions into groups based on pairwise distances and takes a random subset from each cluster to compose a core set.
+#'
 #' @param dist.all a distance matrix
 #' @param n.clust number of clusters into which to group accessions
 #' @param size.core percentage of total number of accessions to select for core, default is 10\%
@@ -65,6 +72,9 @@ sil.width<-function(dist.all, n.clust.to.check=9, hc.func="hclust", hc.method="w
 #'
 #' @return dataframe of core entries and the cluster group, pass entry column as a vector
 #' @export
+#'
+#' @examples
+#' data(fake_geno); dist.core(dist(fake_geno), n.clust=9)
 
 
 dist.core<-function(dist.all, n.clust, size.core=0.1, hc.method="ward.D2"){

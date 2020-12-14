@@ -19,5 +19,8 @@ dist.core(dist.all, n.clust, size.core = 0.1, hc.method = "ward.D2")
 dataframe of core entries and the cluster group, pass entry column as a vector
 }
 \description{
-Select a Core Collection based on a distance matrix
+Clusters accessions into groups based on pairwise distances and takes a random subset from each cluster to compose a core set.
+}
+\examples{
+data(fake_geno); dist.core(dist(fake_geno), n.clust=9)
 }

@@ -7,21 +7,21 @@
 \method{plot}{map}(x, core.names, core.groups = NULL, region = ".", size = 2, ...)
 }
 \arguments{
-\item{x}{data frame : contains columns for accessions names, latitude (column name must include "lat") and longitude (column name must include "long"). Coordinates must be in decimal form.}
+\item{x}{data frame containing columns for accessions names, latitude (column name must include "lat") and longitude (column name must include "long"). Coordinates must be in decimal form.}
 
-\item{core.names}{vector: accessions in core}
+\item{core.names}{character vector of accessions in core}
 
-\item{core.groups}{vector or NULL: entry subgroup (likely from clustering). If provided, plot.all must be FALSE.}
+\item{core.groups}{vector or NULL: entry subgroup (likely from clustering). If provided, only core entries will be plotted}
 
 \item{region}{character vector: regions/countries to plot. Default is a world map.}
 
 \item{size}{integer: size of points to plot}
 
-\item{...}{legacy paramaters from 'plot()'}
+\item{...}{other parameters}
 }
 \value{
-
+map of accessions plotted according to geographic data. Core entries are either highlighted in red and all other accessions are plotted in black or core entries are colored according to subgroup and other accessions are not plotted.
 }
 \description{
-description
+Plots geographic passport data for accessions
 }

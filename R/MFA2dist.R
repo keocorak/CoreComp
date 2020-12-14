@@ -4,7 +4,7 @@
 #'
 #' @param mfa a "MFA" object
 #' @param n.dim numeric value specifying the number of principal components to use to construct a distance matrix
-#' @param method the distance measure to be used. Default is "euclidean". See "dist" for other options.
+#' @param method the distance measure to be used. Default is "euclidean". See "stats::dist" for other options.
 #'
 #' @return MFA2dist.df returns a data frame of a distance object
 #' @export

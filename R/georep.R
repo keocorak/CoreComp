@@ -1,15 +1,15 @@
 #' Plot geographic map of core entries
 #'
-#' description
+#' Plots geographic passport data for accessions
 #'
-#' @param x data frame : contains columns for accessions names, latitude (column name must include "lat") and longitude (column name must include "long"). Coordinates must be in decimal form.
-#' @param core.names vector: accessions in core
-#' @param core.groups vector or NULL: entry subgroup (likely from clustering). If provided, plot.all must be FALSE.
+#' @param x data frame containing columns for accessions names, latitude (column name must include "lat") and longitude (column name must include "long"). Coordinates must be in decimal form.
+#' @param core.names character vector of accessions in core
+#' @param core.groups vector or NULL: entry subgroup (likely from clustering). If provided, only core entries will be plotted
 #' @param region character vector: regions/countries to plot. Default is a world map.
 #' @param size integer: size of points to plot
-#' @param ... legacy paramaters from 'plot()'
+#' @param ... other parameters
 #'
-#' @return
+#' @return map of accessions plotted according to geographic data. Core entries are either highlighted in red and all other accessions are plotted in black or core entries are colored according to subgroup and other accessions are not plotted.
 #' @export
 #'
 

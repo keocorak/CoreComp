@@ -7,7 +7,7 @@
 noirot.contribution(geno.dist.all, core.names, k = 2)
 }
 \arguments{
-\item{geno.dist.all}{distance matrix}
+\item{geno.dist.all}{genetic distance matrix}
 
 \item{core.names}{character vector of entry names to be included in core}
 
@@ -18,4 +18,8 @@ PC score
 }
 \description{
 Perform multidimensional scaling of genotypic distance matrix and calculate summed relative contribution of entries in core set following Noirot et al. (1996).
+}
+\examples{
+core<-dist.core(as.matrix(dist(fake_geno)), n.clust=9)
+noirot.contribution(as.matrix(dist(fake_geno)), core$name)
 }

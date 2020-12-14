@@ -7,13 +7,13 @@
 \method{plot}{geno.entries}(x, core.names, k = 2, axes = c(1, 2), ...)
 }
 \arguments{
-\item{x}{distance matrix}
+\item{x}{genetic distance matrix}
 
 \item{core.names}{character vector of entry names to be included in core}
 
 \item{k}{the maximum dimensions in which to represent data; must be less than n}
 
-\item{axes}{vector of dimensions to represent with bi-plot, must  be equal to 2}
+\item{axes}{vector of length 2 specifying dimensions to represent with bi-plot}
 
 \item{...}{other parameters}
 }

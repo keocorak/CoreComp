@@ -7,16 +7,16 @@
 pred.value(pheno, trait.col, geno.rel.all, core.names)
 }
 \arguments{
-\item{pheno}{pheno file}
+\item{pheno}{dataframe of phenotypic information file}
 
-\item{trait.col}{trait col}
+\item{trait.col}{trait column index}
 
-\item{geno.rel.all}{geno matrix}
+\item{geno.rel.all}{genotypic  relationship matrix matrix}
 
-\item{core.names}{core names}
+\item{core.names}{character vector of core entries}
 }
 \value{
-
+correlation between predicted and actual value for accessions outside of the core
 }
 \description{
 Predictive value of core entries

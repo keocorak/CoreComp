@@ -15,5 +15,9 @@ cor.cophenetic(dist.all, hc.method = "ward.D2")
 correlation between cophenetic distances and original distance matrix
 }
 \description{
-calculate correlation between cophenetic distances and original distance matrix
+Calculates correlation between cophenetic distances and an original distance matrix.
+High correlation (>0.8) can provide evidence for population structure.
+}
+\examples{
+data(fake_geno); cor.cophenetic(dist(fake_geno))
 }

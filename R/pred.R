@@ -1,14 +1,15 @@
 #' Predictive value of core entries
 #'
-#' @param pheno pheno file
-#' @param trait.col trait col
-#' @param geno.rel.all geno matrix
-#' @param core.names core names
+#' @param pheno dataframe of phenotypic information file
+#' @param trait.col trait column index
+#' @param geno.rel.all genotypic  relationship matrix matrix
+#' @param core.names character vector of core entries
 #'
-#' @return
+#' @return correlation between predicted and actual value for accessions outside of the core
 #' @export
 #'
-#' @examples
+
+
 pred.value<-function(pheno, trait.col, geno.rel.all, core.names){
 
 test<-core.names
