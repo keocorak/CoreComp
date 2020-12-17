@@ -10,7 +10,7 @@
 #'
 
 
-pred.value<-function(pheno, trait.col, geno.rel.all, core.names){
+pred.accuracy<-function(pheno, trait.col, geno.rel.all, core.names){
 
 test<-core.names
 valid<-rownames(pheno)[!match(rownames(pheno),core.names, nomatch=0)>0] #validation PIs
